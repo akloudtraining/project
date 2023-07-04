@@ -1,22 +1,22 @@
 pipeline {
     agent any
     environment{
-      DOCKERHUB_CREDENTIALS = credentials('docker-creds')
+     registry = "a330167320139.dkr.ecr.us-east-1.amazonaws.com/nodejs-app"
     }
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t melong123/webapp:1.0.2 .'
+                sh 'docker build -t a330167320139.dkr.ecr.us-east-1.amazonaws.com/nodejs-app:1.0.2 .'
             }
         }
         stage('Login') {
             steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin acct_id.dkr.ecr.us-east-1.amazonaws.com'
             }
         }
         stage('Push') {
             steps {
-                sh 'docker push melong123/webapp:1.0.2'
+                sh 'docker push  a330167320139.dkr.ecr.us-east-1.amazonaws.com/nodejs-app:1.0.2'
             }
         }
         stage('Logout') {
