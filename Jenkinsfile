@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t a330167320139.dkr.ecr.us-east-1.amazonaws.com/nodejs-app:1.0.2 .'
+                sh 'docker build -t 330167320139.dkr.ecr.us-east-1.amazonaws.com/nodejs-app:1.0.2 .'
             }
         }
         stage('Login') {
